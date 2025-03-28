@@ -2,36 +2,34 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.kanshan.jackson.ext</groupId>
+    <groupId>io.github.kanshanos</groupId>
     <artifactId>jackson-field-ext</artifactId>
-    <version>${revision}</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <name>jackson-field-ext</name>
     <description>基于 Jackson 序列化自定义的属性拓展框架</description>
-    <url>https://github.com/im-neo/jackson-field-ext</url>
+    <url>https://github.com/kanshanos/jackson-field-ext</url>
 
 
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
         </license>
     </licenses>
 
     <scm>
-        <connection>scm:git@github.com:im-neo/jackson-field-ext.git</connection>
-        <developerConnection>scm:git@github.com:im-neo/jackson-field-ext.git</developerConnection>
-        <url>https://github.com/im-neo/jackson-field-ext</url>
-        <tag>HEAD</tag>
+        <connection>scm:git:https://github.com/KanshanOS/jackson-field-ext.git</connection>
+        <developerConnection>scm:git:git@github.com:KanshanOS/jackson-field-ext.git</developerConnection>
+        <url>https://github.com/KanshanOS/jackson-field-ext</url>
     </scm>
 
     <developers>
         <developer>
-            <name>neo</name>
+            <name>kanshan</name>
             <email>im.neoyu@gmail.com</email>
-            <organization>kanshan</organization>
+            <url>https://github.com/KanshanOS</url>
         </developer>
     </developers>
 
@@ -44,7 +42,6 @@
 
     <properties>
         <revision>1.0.0</revision>
-        <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -60,19 +57,19 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.kanshan.jackson.ext.core</groupId>
+                <groupId>io.github.kanshanos</groupId>
                 <artifactId>jackson-field-ext-core</artifactId>
-                <version>${revision}</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
-                <groupId>com.kanshan.jackson.ext</groupId>
+                <groupId>io.github.kanshanos</groupId>
                 <artifactId>jackson-field-ext-springboot-starter</artifactId>
-                <version>${revision}</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
-                <groupId>com.kanshan.jackson.ext</groupId>
+                <groupId>io.github.kanshanos</groupId>
                 <artifactId>jackson-field-ext-sample</artifactId>
-                <version>${revision}</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
@@ -132,4 +129,159 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <!--    <distributionManagement>-->
+    <!--        <snapshotRepository>-->
+    <!--            <id>central</id>-->
+    <!--            <url>https://central.sonatype.com/content/repositories/snapshots</url>-->
+    <!--        </snapshotRepository>-->
+    <!--        <repository>-->
+    <!--            <id>central</id>-->
+    <!--            <url>https://central.sonatype.com/service/local/staging/deploy/maven2</url>-->
+    <!--        </repository>-->
+    <!--    </distributionManagement>-->
+
+
+    <profiles>
+        <profile>
+            <id>disable-javadoc-doclint</id>
+            <activation>
+                <jdk>[1.8,)</jdk>
+            </activation>
+            <properties>
+                <javadoc.opts>-Xdoclint:none</javadoc.opts>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <additionalparam>${javadoc.opts}</additionalparam>
+                </configuration>
+            </plugin>
+            <!--            <plugin>-->
+            <!--                <groupId>org.apache.maven.plugins</groupId>-->
+            <!--                <artifactId>maven-source-plugin</artifactId>-->
+            <!--                <version>2.2.1</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>attach-sources</id>-->
+            <!--                        <goals>-->
+            <!--                            <goal>jar-no-fork</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>org.apache.maven.plugins</groupId>-->
+            <!--                <artifactId>maven-javadoc-plugin</artifactId>-->
+            <!--                <version>2.9.1</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>attach-javadocs</id>-->
+            <!--                        <goals>-->
+            <!--                            <goal>jar</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.7.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <autoPublish>true</autoPublish>
+                    <waitUntil>published</waitUntil>
+                </configuration>
+            </plugin>
+
+            <!--            &lt;!&ndash; ++++++++++++++++++++++++++++++++++ &ndash;&gt;-->
+            <!--            &lt;!&ndash; version number &ndash;&gt;-->
+            <!--            <plugin>-->
+            <!--                <groupId>org.codehaus.mojo</groupId>-->
+            <!--                <artifactId>flatten-maven-plugin</artifactId>-->
+            <!--                <version>1.1.0</version>-->
+            <!--                <configuration>-->
+            <!--                    <updatePomFile>true</updatePomFile>-->
+            <!--                    <flattenMode>resolveCiFriendliesOnly</flattenMode>-->
+            <!--                </configuration>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>flatten</id>-->
+            <!--                        <phase>process-resources</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>flatten</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                    <execution>-->
+            <!--                        <id>flatten.clean</id>-->
+            <!--                        <phase>clean</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>clean</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.5</version>
+                    <executions>
+                        <execution>
+                            <id>sign-artifacts</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>sign</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

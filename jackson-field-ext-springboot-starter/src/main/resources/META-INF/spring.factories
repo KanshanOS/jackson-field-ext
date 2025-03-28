@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.kanshan.jackson.ext.config.ExtFieldAutoConfiguration
+  io.github.kanshanos.jackson.ext.config.ExtFieldAutoConfiguration
