@@ -54,3 +54,13 @@ public User getUser() {
 }
 ```
 
+### 快速开始
+> Maven 依赖
+```xml
+<dependency>
+    <groupId>io.github.kanshanos</groupId>
+    <artifactId>jackson-field-ext-springboot-starter</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
