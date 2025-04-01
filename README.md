@@ -29,13 +29,11 @@ public class User implements Serializable {
 @GetMapping("get")
 public User getUser() {
     String category = "1,2,3";
-    return new User(
-            1,
-            category,
-            19,
-            "15812341234",
-            "123456@gmail.com"
-    );
+    new User().setCategory(1)
+            .setCategory1(category)
+            .setAge(19)
+            .setMobile("15912345678")
+            .setEmail("123456@gmail.com");
 }
 ```
 

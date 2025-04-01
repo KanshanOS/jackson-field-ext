@@ -11,17 +11,15 @@ public class UserController {
     @GetMapping("get")
     public User getUser() {
         String category = "1,2,3";
-        return new User(
-                1,
-                category,
-                category,
-                category,
-                "[" + category + "]",
-                Lists.newArrayList(1, 2, 3),
-                19,
-                "15979991234",
-                "123456@gmail.com"
-        );
+        return new User().setCategory(1)
+                .setCategory1(category)
+                .setCategory2(category)
+                .setCategory3(category)
+                .setCategory4("[" + category + "]")
+                .setCategory5(Lists.newArrayList(1, 2, 3))
+                .setAge(19)
+                .setMobile("15912345678")
+                .setEmail("123456@gmail.com");
     }
 
 
