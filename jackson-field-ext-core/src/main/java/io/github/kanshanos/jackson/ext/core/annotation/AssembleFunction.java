@@ -32,11 +32,11 @@ public @interface AssembleFunction {
     String ext() default "";
 
     /**
-     * 使用拓展字段，默认为 false
+     * 使用覆盖当前字段，默认为 false
      *
      * @return clazz
      */
-    boolean useExt() default false;
+    boolean override() default false;
 
     /**
      * 扩展字段值类型

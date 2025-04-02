@@ -26,7 +26,7 @@ public abstract class AbstractAssembleHandler<T> extends JsonSerializer<Object> 
 
     @Override
     public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        if (annotation == null) {
+        if (!properties.isEnabled() || annotation == null) {
             serializers.defaultSerializeValue(value, gen);
             return;
         }

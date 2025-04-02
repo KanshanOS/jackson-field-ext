@@ -41,4 +41,11 @@ public @interface AssembleSpEL {
      * @return expression
      */
     String expression() default "";
+
+    /**
+     * 使用覆盖当前字段，默认为 false
+     *
+     * @return clazz
+     */
+    boolean override() default false;
 }

@@ -20,6 +20,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -94,13 +95,9 @@ public class AssembleEnumHandler extends AbstractAssembleHandler<AssembleEnum> {
             return null;
         }
 
-        List<Object> extFieldValueList = srcFieldValueList.stream()
-                .map(item -> EnumCache.enumCache(annotation.enumClass(), src, item))
-                .filter(Objects::nonNull)
-                .map(item -> ReflectUtil.getFieldValue(item, ref))
-                .collect(Collectors.toList());
+        Map<Object, Object> extFieldMap = EnumCache.enumMap(annotation.enumClass(), src, ref, srcFieldValueList);
 
-        return formatExtFieldValues(extFieldValueList, annotation.etxType());
+        return formatExtFieldValues(extFieldMap, annotation.etxType());
     }
 
 
@@ -137,17 +134,19 @@ public class AssembleEnumHandler extends AbstractAssembleHandler<AssembleEnum> {
      * @author Neo
      * @since 2025/3/26 16:29
      */
-    private Object formatExtFieldValues(List<Object> values, Type extType) {
+    private Object formatExtFieldValues(Map<Object, Object> extFieldMap, Type extType) {
         DataType dataType = extType.dataType();
         switch (dataType) {
             case STRING_ARRAY:
-                return values.stream()
+                return extFieldMap.values().stream()
                         .map(item -> Objects.toString(item, ""))
                         .collect(Collectors.joining(TypeUtils.separator(extType, properties)));
             case JSON_ARRAY:
-                return JSONUtil.toJsonStr(values);
+                return JSONUtil.toJsonStr(extFieldMap.values());
+            case LIST:
+                return extFieldMap.values();
             default:
-                return values;
+                return extFieldMap;
         }
     }
 }

@@ -59,12 +59,19 @@ public class User implements Serializable {
     )
     private List<Integer> category5;
 
+    @AssembleEnum(enumClass = CategoryEnum.class,
+            type = AssembleType.MANY_TO_MANY,
+            srcType = @Type(dataType = DataType.LIST),
+            etxType = @Type(dataType = DataType.MAP)
+    )
+    private List<Integer> category6;
+
     @AssembleSpEL(ext = "ageName", expression = "#value > 18 ? '成年' : '未成年'")
     private int age;
 
     @AssembleFunction(function = MaskPhoneFunction.class)
     private String mobile;
 
-    @AssembleFunction(ext = "newEmail", useExt = true, function = MaskEmailFunction.class)
+    @AssembleFunction(ext = "newEmail", override = true, function = MaskEmailFunction.class)
     private String email;
 }

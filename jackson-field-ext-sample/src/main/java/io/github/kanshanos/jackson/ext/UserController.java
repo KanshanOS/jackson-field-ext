@@ -17,6 +17,7 @@ public class UserController {
                 .setCategory3(category)
                 .setCategory4("[" + category + "]")
                 .setCategory5(Lists.newArrayList(1, 2, 3))
+                .setCategory6(Lists.newArrayList(1, 2, 3))
                 .setAge(19)
                 .setMobile("15912345678")
                 .setEmail("123456@gmail.com");
