@@ -19,7 +19,7 @@ public class User implements Serializable {
     @AssembleFunction(function = MaskPhoneFunction.class)
     private String mobile;
 
-    @AssembleFunction(ext = "newEmail", useExt = true, function = MaskEmailFunction.class)
+    @AssembleFunction(ext = "newEmail", override = true, function = MaskEmailFunction.class)
     private String email;
 }
 ```

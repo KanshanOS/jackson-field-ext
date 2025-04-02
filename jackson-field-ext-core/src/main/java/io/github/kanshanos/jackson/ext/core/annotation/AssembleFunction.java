@@ -25,7 +25,7 @@ import java.util.function.Function;
 public @interface AssembleFunction {
 
     /**
-     * 扩展字段，useExt = true 时生效，默认为原始属性名 + Text
+     * 扩展字段，override = true 时生效，默认为原始属性名 + Text
      *
      * @return field name
      */
