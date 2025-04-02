@@ -4,7 +4,7 @@
 
     <groupId>io.github.kanshanos</groupId>
     <artifactId>jackson-field-ext</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>pom</packaging>
 
     <name>jackson-field-ext</name>
@@ -59,12 +59,12 @@
             <dependency>
                 <groupId>io.github.kanshanos</groupId>
                 <artifactId>jackson-field-ext-core</artifactId>
-                <version>1.0.0</version>
+                <version>1.0.1</version>
             </dependency>
             <dependency>
                 <groupId>io.github.kanshanos</groupId>
                 <artifactId>jackson-field-ext-springboot-starter</artifactId>
-                <version>1.0.0</version>
+                <version>1.0.1</version>
             </dependency>
             <dependency>
                 <groupId>io.github.kanshanos</groupId>
@@ -130,18 +130,6 @@
         </dependencies>
     </dependencyManagement>
 
-    <!--    <distributionManagement>-->
-    <!--        <snapshotRepository>-->
-    <!--            <id>central</id>-->
-    <!--            <url>https://central.sonatype.com/content/repositories/snapshots</url>-->
-    <!--        </snapshotRepository>-->
-    <!--        <repository>-->
-    <!--            <id>central</id>-->
-    <!--            <url>https://central.sonatype.com/service/local/staging/deploy/maven2</url>-->
-    <!--        </repository>-->
-    <!--    </distributionManagement>-->
-
-
     <profiles>
         <profile>
             <id>disable-javadoc-doclint</id>
@@ -185,32 +173,6 @@
                     <additionalparam>${javadoc.opts}</additionalparam>
                 </configuration>
             </plugin>
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-source-plugin</artifactId>-->
-            <!--                <version>2.2.1</version>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <id>attach-sources</id>-->
-            <!--                        <goals>-->
-            <!--                            <goal>jar-no-fork</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-javadoc-plugin</artifactId>-->
-            <!--                <version>2.9.1</version>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <id>attach-javadocs</id>-->
-            <!--                        <goals>-->
-            <!--                            <goal>jar</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
@@ -236,34 +198,6 @@
                     <waitUntil>published</waitUntil>
                 </configuration>
             </plugin>
-
-            <!--            &lt;!&ndash; ++++++++++++++++++++++++++++++++++ &ndash;&gt;-->
-            <!--            &lt;!&ndash; version number &ndash;&gt;-->
-            <!--            <plugin>-->
-            <!--                <groupId>org.codehaus.mojo</groupId>-->
-            <!--                <artifactId>flatten-maven-plugin</artifactId>-->
-            <!--                <version>1.1.0</version>-->
-            <!--                <configuration>-->
-            <!--                    <updatePomFile>true</updatePomFile>-->
-            <!--                    <flattenMode>resolveCiFriendliesOnly</flattenMode>-->
-            <!--                </configuration>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <id>flatten</id>-->
-            <!--                        <phase>process-resources</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>flatten</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                    <execution>-->
-            <!--                        <id>flatten.clean</id>-->
-            <!--                        <phase>clean</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>clean</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
         </plugins>
         <pluginManagement>
             <plugins>

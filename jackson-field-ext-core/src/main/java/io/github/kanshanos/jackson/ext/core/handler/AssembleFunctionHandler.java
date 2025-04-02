@@ -39,13 +39,9 @@ public class AssembleFunctionHandler extends AbstractAssembleHandler<AssembleFun
      * @author Neo
      * @since 2025/4/2 12:58
      */
-    private <T, R> R applyFunction(Class<? extends Function<?, ?>> functionClass, T value) throws IOException {
-        try {
-            @SuppressWarnings("unchecked")
-            Function<T, R> function = (Function<T, R>) applicationContext.getBean(functionClass);
-            return function.apply(value);
-        } catch (Exception e) {
-            throw new IOException("Failed to apply function: " + functionClass.getName(), e);
-        }
+    private <T, R> R applyFunction(Class<? extends Function<?, ?>> functionClass, T value) {
+        @SuppressWarnings("unchecked")
+        Function<T, R> function = (Function<T, R>) applicationContext.getBean(functionClass);
+        return function.apply(value);
     }
 }

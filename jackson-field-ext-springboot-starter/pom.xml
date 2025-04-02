@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.github.kanshanos</groupId>
         <artifactId>jackson-field-ext</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
 
     <artifactId>jackson-field-ext-springboot-starter</artifactId>

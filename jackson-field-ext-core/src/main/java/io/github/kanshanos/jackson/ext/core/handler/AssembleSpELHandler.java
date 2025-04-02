@@ -35,14 +35,10 @@ public class AssembleSpELHandler extends AbstractAssembleHandler<AssembleSpEL> {
         serializeWithOverrideCheck(value, extFieldName, extFieldValue, gen, serializers, annotation.override());
     }
 
-    private Object evaluateSpEL(Object value, String expression, Class<?> targetType) throws IOException {
-        try {
-            Expression exp = parser.parseExpression(expression);
-            StandardEvaluationContext context = new StandardEvaluationContext();
-            context.setVariable("value", value);
-            return exp.getValue(context, targetType);
-        } catch (Exception e) {
-            throw new IOException("Failed to evaluate SpEL expression: " + expression, e);
-        }
+    private Object evaluateSpEL(Object value, String expression, Class<?> targetType) {
+        Expression exp = parser.parseExpression(expression);
+        StandardEvaluationContext context = new StandardEvaluationContext();
+        context.setVariable("value", value);
+        return exp.getValue(context, targetType);
     }
 }
