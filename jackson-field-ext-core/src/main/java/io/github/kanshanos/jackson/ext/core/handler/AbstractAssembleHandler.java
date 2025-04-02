@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.ContextualSerializer;
 import io.github.kanshanos.jackson.ext.core.properties.JacksonFieldExtProperties;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import java.io.IOException;
 /**
  * 抽象的 Assemble 处理类，提取公共逻辑
  */
+@Slf4j
 public abstract class AbstractAssembleHandler<T> extends JsonSerializer<Object> implements ContextualSerializer {
 
     @Resource
@@ -32,7 +34,12 @@ public abstract class AbstractAssembleHandler<T> extends JsonSerializer<Object> 
         }
 
         // 模板方法：子类实现具体的序列化逻辑
-        doSerialize(value, gen, serializers);
+        try {
+            doSerialize(value, gen, serializers);
+        } catch (IOException e) {
+            log.warn("序列化失败", e);
+            serializers.defaultSerializeValue(value, gen);
+        }
     }
 
     @Override
