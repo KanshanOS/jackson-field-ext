@@ -61,6 +61,7 @@ public class User implements Serializable {
 
     @AssembleEnum(enumClass = CategoryEnum.class,
             type = AssembleType.MANY_TO_MANY,
+            override = true,
             srcType = @Type(dataType = DataType.LIST),
             etxType = @Type(dataType = DataType.MAP)
     )

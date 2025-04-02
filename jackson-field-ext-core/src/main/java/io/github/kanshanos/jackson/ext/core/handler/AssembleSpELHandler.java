@@ -32,7 +32,7 @@ public class AssembleSpELHandler extends AbstractAssembleHandler<AssembleSpEL> {
     protected void doSerialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         String extFieldName = resolveExtFieldName(annotation.ext());
         Object extFieldValue = evaluateSpEL(value, annotation.expression(), annotation.clazz());
-        serializeWithExtField(value, extFieldValue, extFieldName, gen, serializers);
+        serializeWithOverrideCheck(value, extFieldName, extFieldValue, gen, serializers, annotation.override());
     }
 
     private Object evaluateSpEL(Object value, String expression, Class<?> targetType) throws IOException {

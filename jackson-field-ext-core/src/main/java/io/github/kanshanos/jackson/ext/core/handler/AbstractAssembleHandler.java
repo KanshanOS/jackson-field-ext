@@ -69,4 +69,17 @@ public abstract class AbstractAssembleHandler<T> extends JsonSerializer<Object> 
         serializers.defaultSerializeValue(originalValue, gen);
         gen.writeObjectField(extFieldName, extFieldValue);
     }
+
+    /**
+     * 根据是否允许覆盖现有值来序列化对象
+     */
+    protected void serializeWithOverrideCheck(Object value, String extFieldName, Object extFieldValue,
+                                              JsonGenerator gen, SerializerProvider serializers,
+                                              boolean override) throws IOException {
+        if (override) {
+            serializers.defaultSerializeValue(extFieldValue, gen);
+        } else {
+            serializeWithExtField(value, extFieldValue, extFieldName, gen, serializers);
+        }
+    }
 }
