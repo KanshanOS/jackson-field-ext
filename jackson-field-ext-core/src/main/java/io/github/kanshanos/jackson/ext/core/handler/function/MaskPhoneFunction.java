@@ -1,6 +1,7 @@
 package io.github.kanshanos.jackson.ext.core.handler.function;
 
 import cn.hutool.core.util.StrUtil;
+import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
 
@@ -11,9 +12,10 @@ import java.util.function.Function;
  * @author Neo
  * @since 2025/3/27 08:47
  */
-public class MaskPhoneFunction implements Function<Object, Object> {
+@Component
+public class MaskPhoneFunction implements Function<String, String> {
     @Override
-    public Object apply(Object o) {
-        return StrUtil.hide(String.valueOf(o), 3, 7);
+    public String apply(String o) {
+        return StrUtil.hide(o, 3, 7);
     }
 }

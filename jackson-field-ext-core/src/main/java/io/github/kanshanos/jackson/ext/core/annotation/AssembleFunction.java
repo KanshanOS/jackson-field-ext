@@ -43,5 +43,5 @@ public @interface AssembleFunction {
      *
      * @return clazz
      */
-    Class<? extends Function<Object, Object>> function();
+    Class<? extends Function<?, ?>> function();
 }

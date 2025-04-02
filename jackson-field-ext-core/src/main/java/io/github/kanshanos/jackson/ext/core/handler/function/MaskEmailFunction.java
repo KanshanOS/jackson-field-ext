@@ -1,6 +1,7 @@
 package io.github.kanshanos.jackson.ext.core.handler.function;
 
 import cn.hutool.core.util.StrUtil;
+import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
 
@@ -11,10 +12,10 @@ import java.util.function.Function;
  * @author Neo
  * @since 2025/3/27 08:47
  */
-public class MaskEmailFunction implements Function<Object, Object> {
+@Component
+public class MaskEmailFunction implements Function<String, String> {
     @Override
-    public Object apply(Object o) {
-        String value = String.valueOf(o);
-        return StrUtil.hide(value, 2, StrUtil.indexOf(value, '@') - 2);
+    public String apply(String o) {
+        return StrUtil.hide(o, 2, StrUtil.indexOf(o, '@') - 2);
     }
 }
