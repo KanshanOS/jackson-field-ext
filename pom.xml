@@ -41,7 +41,6 @@
     </modules>
 
     <properties>
-        <revision>1.0.0</revision>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -52,6 +51,7 @@
         <hutool-all.version>5.8.35</hutool-all.version>
         <spring-boot.version>2.6.13</spring-boot.version>
         <lombok.version>1.18.30</lombok.version>
+        <slf4j-api.version>1.7.36</slf4j-api.version>
     </properties>
 
     <dependencyManagement>
@@ -130,7 +130,7 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>2.0.17</version>
+                <version>${slf4j-api.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
