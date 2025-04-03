@@ -29,13 +29,6 @@ public @interface AssembleSpEL {
     String ext() default "";
 
     /**
-     * 扩展字段值类型，默认为 String
-     *
-     * @return clazz
-     */
-    Class<?> clazz() default String.class;
-
-    /**
      * SpEL 表达式，示例：#value > 18 ? '成年' : '未成年'
      *
      * @return expression
