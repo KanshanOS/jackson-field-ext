@@ -42,19 +42,10 @@ public class AssembleEnumHandler extends AbstractAssembleHandler<AssembleEnum> {
         if (annotation.mapping() == null) {
             return; // 无映射配置时直接返回
         }
-        String extFieldName = resolveExtFieldName();
+        String extFieldName = resolveExtFieldName(annotation.ext());
         Object extFieldValue = resolveExtFieldValue(value);
 
         serializeWithOverrideCheck(value, extFieldName, extFieldValue, gen, serializers, annotation.override());
-    }
-
-
-    /**
-     * 解析扩展字段名称
-     */
-    private String resolveExtFieldName() {
-        Mapping mapping = annotation.mapping();
-        return MappingUtils.ext(mapping, properties, property);
     }
 
     /**

@@ -1,7 +1,5 @@
 package io.github.kanshanos.jackson.ext.core.util;
 
-import com.fasterxml.jackson.databind.BeanProperty;
-
 import io.github.kanshanos.jackson.ext.core.annotation.Mapping;
 import io.github.kanshanos.jackson.ext.core.properties.JacksonFieldExtProperties;
 import org.apache.commons.lang3.StringUtils;
@@ -18,9 +16,5 @@ public class MappingUtils {
 
     public static String ref(Mapping mapping, JacksonFieldExtProperties properties) {
         return StringUtils.isBlank(mapping.ref()) ? properties.getRef() : mapping.ref();
-    }
-
-    public static String ext(Mapping mapping, JacksonFieldExtProperties properties, BeanProperty property) {
-        return StringUtils.isBlank(mapping.ext()) ? property.getName() + properties.getExt_suffix() : mapping.ext();
     }
 }

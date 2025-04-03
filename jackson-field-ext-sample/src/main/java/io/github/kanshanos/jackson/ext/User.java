@@ -42,7 +42,8 @@ public class User implements Serializable {
     @AssembleEnum(enumClass = CategoryEnum.class,
             type = AssembleType.MANY_TO_MANY,
             etxType = @Type(dataType = DataType.STRING_ARRAY),
-            mapping = @Mapping(ref = "alias", ext = "categoryName")
+            mapping = @Mapping(ref = "alias"),
+            ext = "categoryName"
     )
     private String category3;
     @AssembleEnum(enumClass = CategoryEnum.class,
