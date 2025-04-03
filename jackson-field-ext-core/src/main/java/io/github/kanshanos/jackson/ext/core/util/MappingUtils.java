@@ -11,10 +11,10 @@ import org.apache.commons.lang3.StringUtils;
 public class MappingUtils {
 
     public static String src(Mapping mapping, JacksonFieldExtProperties properties) {
-        return StringUtils.isBlank(mapping.src()) ? properties.getSrc() : mapping.src();
+        return StringUtils.defaultIfBlank(mapping.src(), properties.getSrc());
     }
 
     public static String ref(Mapping mapping, JacksonFieldExtProperties properties) {
-        return StringUtils.isBlank(mapping.ref()) ? properties.getRef() : mapping.ref();
+        return StringUtils.defaultIfBlank(mapping.ref(), properties.getRef());
     }
 }

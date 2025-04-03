@@ -13,6 +13,6 @@ import org.apache.commons.lang3.StringUtils;
 public class TypeUtils {
 
     public static String separator(Type type, JacksonFieldExtProperties properties) {
-        return StringUtils.isBlank(type.separator()) ? properties.getSeparator() : type.separator();
+        return StringUtils.defaultIfBlank(type.separator(), properties.getSeparator());
     }
 }
