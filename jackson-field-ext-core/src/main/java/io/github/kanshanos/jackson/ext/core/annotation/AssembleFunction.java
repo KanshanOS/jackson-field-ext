@@ -25,23 +25,23 @@ import java.util.function.Function;
 public @interface AssembleFunction {
 
     /**
-     * 扩展字段，useExt = true 时生效，默认为原始属性名 + Text
+     * 扩展字段，override = true 时生效，默认为原始属性名 + Text
      *
      * @return field name
      */
     String ext() default "";
 
     /**
-     * 使用拓展字段，默认为 false
+     * 使用覆盖当前字段，默认为 false
      *
      * @return clazz
      */
-    boolean useExt() default false;
+    boolean override() default false;
 
     /**
      * 扩展字段值类型
      *
      * @return clazz
      */
-    Class<? extends Function<Object, Object>> function();
+    Class<? extends Function<?, ?>> function();
 }

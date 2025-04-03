@@ -31,11 +31,4 @@ public @interface Mapping {
      * @return field name
      */
     String ref() default "";
-
-    /**
-     * 扩展字段，默认为原始属性名 + Text
-     *
-     * @return field name
-     */
-    String ext() default "";
 }

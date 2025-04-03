@@ -49,4 +49,18 @@ public @interface AssembleEnum {
      * 映射关系
      */
     Mapping mapping() default @Mapping;
+
+    /**
+     * 扩展字段，默认为原始属性名 + Text
+     *
+     * @return field name
+     */
+    String ext() default "";
+
+    /**
+     * 使用覆盖当前字段，默认为 false
+     *
+     * @return clazz
+     */
+    boolean override() default false;
 }

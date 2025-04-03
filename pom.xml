@@ -4,7 +4,7 @@
 
     <groupId>io.github.kanshanos</groupId>
     <artifactId>jackson-field-ext</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.3</version>
     <packaging>pom</packaging>
 
     <name>jackson-field-ext</name>
@@ -41,7 +41,6 @@
     </modules>
 
     <properties>
-        <revision>1.0.0</revision>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -52,6 +51,7 @@
         <hutool-all.version>5.8.35</hutool-all.version>
         <spring-boot.version>2.6.13</spring-boot.version>
         <lombok.version>1.18.30</lombok.version>
+        <slf4j-api.version>1.7.36</slf4j-api.version>
     </properties>
 
     <dependencyManagement>
@@ -59,17 +59,17 @@
             <dependency>
                 <groupId>io.github.kanshanos</groupId>
                 <artifactId>jackson-field-ext-core</artifactId>
-                <version>1.0.0</version>
+                <version>1.0.3</version>
             </dependency>
             <dependency>
                 <groupId>io.github.kanshanos</groupId>
                 <artifactId>jackson-field-ext-springboot-starter</artifactId>
-                <version>1.0.0</version>
+                <version>1.0.3</version>
             </dependency>
             <dependency>
                 <groupId>io.github.kanshanos</groupId>
                 <artifactId>jackson-field-ext-sample</artifactId>
-                <version>1.0.0</version>
+                <version>1.0.3</version>
             </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
@@ -127,20 +127,13 @@
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-api.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <!--    <distributionManagement>-->
-    <!--        <snapshotRepository>-->
-    <!--            <id>central</id>-->
-    <!--            <url>https://central.sonatype.com/content/repositories/snapshots</url>-->
-    <!--        </snapshotRepository>-->
-    <!--        <repository>-->
-    <!--            <id>central</id>-->
-    <!--            <url>https://central.sonatype.com/service/local/staging/deploy/maven2</url>-->
-    <!--        </repository>-->
-    <!--    </distributionManagement>-->
-
 
     <profiles>
         <profile>
@@ -185,32 +178,6 @@
                     <additionalparam>${javadoc.opts}</additionalparam>
                 </configuration>
             </plugin>
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-source-plugin</artifactId>-->
-            <!--                <version>2.2.1</version>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <id>attach-sources</id>-->
-            <!--                        <goals>-->
-            <!--                            <goal>jar-no-fork</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-javadoc-plugin</artifactId>-->
-            <!--                <version>2.9.1</version>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <id>attach-javadocs</id>-->
-            <!--                        <goals>-->
-            <!--                            <goal>jar</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
@@ -236,34 +203,6 @@
                     <waitUntil>published</waitUntil>
                 </configuration>
             </plugin>
-
-            <!--            &lt;!&ndash; ++++++++++++++++++++++++++++++++++ &ndash;&gt;-->
-            <!--            &lt;!&ndash; version number &ndash;&gt;-->
-            <!--            <plugin>-->
-            <!--                <groupId>org.codehaus.mojo</groupId>-->
-            <!--                <artifactId>flatten-maven-plugin</artifactId>-->
-            <!--                <version>1.1.0</version>-->
-            <!--                <configuration>-->
-            <!--                    <updatePomFile>true</updatePomFile>-->
-            <!--                    <flattenMode>resolveCiFriendliesOnly</flattenMode>-->
-            <!--                </configuration>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <id>flatten</id>-->
-            <!--                        <phase>process-resources</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>flatten</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                    <execution>-->
-            <!--                        <id>flatten.clean</id>-->
-            <!--                        <phase>clean</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>clean</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
         </plugins>
         <pluginManagement>
             <plugins>

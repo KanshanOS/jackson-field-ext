@@ -31,18 +31,14 @@ public class AssembleSpELHandler extends AbstractAssembleHandler<AssembleSpEL> {
     @Override
     protected void doSerialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         String extFieldName = resolveExtFieldName(annotation.ext());
-        Object extFieldValue = evaluateSpEL(value, annotation.expression(), annotation.clazz());
-        serializeWithExtField(value, extFieldValue, extFieldName, gen, serializers);
+        Object extFieldValue = evaluateSpEL(value, annotation.expression());
+        serializeWithOverrideCheck(value, extFieldName, extFieldValue, gen, serializers, annotation.override());
     }
 
-    private Object evaluateSpEL(Object value, String expression, Class<?> targetType) throws IOException {
-        try {
-            Expression exp = parser.parseExpression(expression);
-            StandardEvaluationContext context = new StandardEvaluationContext();
-            context.setVariable("value", value);
-            return exp.getValue(context, targetType);
-        } catch (Exception e) {
-            throw new IOException("Failed to evaluate SpEL expression: " + expression, e);
-        }
+    private Object evaluateSpEL(Object value, String expression) {
+        Expression exp = parser.parseExpression(expression);
+        StandardEvaluationContext context = new StandardEvaluationContext();
+        context.setVariable("value", value);
+        return exp.getValue(context);
     }
 }

@@ -5,20 +5,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("user")
 public class UserController {
     @GetMapping("get")
-    public User getUser() {
-        String category = "1,2,3";
+    public User get() {
+        List<Integer> categoryCodes = Lists.newArrayList(
+                CategoryEnum.平板.getCode(),
+                CategoryEnum.手机.getCode(),
+                CategoryEnum.手表.getCode()
+        );
+        String categoryCodeStringArray = categoryCodes.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(","));
+
         return new User().setCategory(1)
-                .setCategory1(category)
-                .setCategory2(category)
-                .setCategory3(category)
-                .setCategory4("[" + category + "]")
-                .setCategory5(Lists.newArrayList(1, 2, 3))
+                .setCategory1(categoryCodeStringArray)
+                .setCategory2(categoryCodes)
                 .setAge(19)
-                .setMobile("15912345678")
                 .setEmail("123456@gmail.com");
     }
 

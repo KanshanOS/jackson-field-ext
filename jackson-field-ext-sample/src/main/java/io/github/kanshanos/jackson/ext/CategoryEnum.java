@@ -28,13 +28,4 @@ public enum CategoryEnum {
         this.desc = desc;
         this.alias = alias;
     }
-
-
-    public Integer getCode() {
-        return this.code;
-    }
-
-    public String getDesc() {
-        return this.desc;
-    }
 }

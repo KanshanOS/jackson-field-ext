@@ -17,9 +17,14 @@ public enum DataType {
      */
     JSON_ARRAY,
     /**
-     * 集合，如：[1,2,3]
+     * LIST 集合，如：[1,2,3]
      */
     LIST,
+    /**
+     * MAP 集合，如：{0:'FEMALE',1:'MALE'}
+     * 仅适用于 extType 结果类型标注
+     */
+    MAP,
     ;
 
 

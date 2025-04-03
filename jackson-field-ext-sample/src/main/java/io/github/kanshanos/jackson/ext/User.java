@@ -8,7 +8,6 @@ import io.github.kanshanos.jackson.ext.core.annotation.Type;
 import io.github.kanshanos.jackson.ext.core.enums.AssembleType;
 import io.github.kanshanos.jackson.ext.core.enums.DataType;
 import io.github.kanshanos.jackson.ext.core.handler.function.MaskEmailFunction;
-import io.github.kanshanos.jackson.ext.core.handler.function.MaskPhoneFunction;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,44 +26,22 @@ public class User implements Serializable {
     @AssembleEnum(enumClass = CategoryEnum.class)
     private Integer category;
 
-    @AssembleEnum(enumClass = CategoryEnum.class,
-            type = AssembleType.MANY_TO_MANY,
-            etxType = @Type(dataType = DataType.JSON_ARRAY)
-    )
+    @AssembleEnum(enumClass = CategoryEnum.class, type = AssembleType.MANY_TO_MANY)
     private String category1;
 
     @AssembleEnum(enumClass = CategoryEnum.class,
             type = AssembleType.MANY_TO_MANY,
-            etxType = @Type(dataType = DataType.LIST)
-    )
-    private String category2;
-
-    @AssembleEnum(enumClass = CategoryEnum.class,
-            type = AssembleType.MANY_TO_MANY,
-            etxType = @Type(dataType = DataType.STRING_ARRAY),
-            mapping = @Mapping(ref = "alias", ext = "categoryName")
-    )
-    private String category3;
-    @AssembleEnum(enumClass = CategoryEnum.class,
-            type = AssembleType.MANY_TO_MANY,
-            srcType = @Type(dataType = DataType.JSON_ARRAY),
-            etxType = @Type(dataType = DataType.JSON_ARRAY)
-    )
-    private String category4;
-
-    @AssembleEnum(enumClass = CategoryEnum.class,
-            type = AssembleType.MANY_TO_MANY,
             srcType = @Type(dataType = DataType.LIST),
-            etxType = @Type(dataType = DataType.JSON_ARRAY)
+            etxType = @Type(dataType = DataType.MAP),
+            mapping = @Mapping(src = "code", ref = "desc"),
+            ext = "categoryMapping",
+            override = true
     )
-    private List<Integer> category5;
+    private List<Integer> category2;
 
     @AssembleSpEL(ext = "ageName", expression = "#value > 18 ? '成年' : '未成年'")
     private int age;
 
-    @AssembleFunction(function = MaskPhoneFunction.class)
-    private String mobile;
-
-    @AssembleFunction(ext = "newEmail", useExt = true, function = MaskEmailFunction.class)
+    @AssembleFunction(function = MaskEmailFunction.class, override = true)
     private String email;
 }
