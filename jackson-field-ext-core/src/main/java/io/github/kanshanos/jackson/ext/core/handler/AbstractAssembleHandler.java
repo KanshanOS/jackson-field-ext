@@ -62,10 +62,8 @@ public abstract class AbstractAssembleHandler<T> extends JsonSerializer<Object> 
     /**
      * 解析扩展字段名
      */
-    protected String resolveExtFieldName(String extAnnotation) {
-        return StringUtils.isBlank(extAnnotation)
-                ? property.getName() + properties.getExt_suffix()
-                : extAnnotation;
+    protected String resolveExtFieldName(String ext) {
+        return StringUtils.defaultIfBlank(ext, property.getName() + properties.getExt_suffix());
     }
 
     /**
