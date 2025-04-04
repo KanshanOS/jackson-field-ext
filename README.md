@@ -1,13 +1,22 @@
 ## jackson-field-ext
 ## 介绍
-> jackson-field-ext 是一个基于 Spring Boot 的 JSON 数据组装组件，通过注解的方式，实现 JSON 数据的组装，支持枚举类、SpEL、自定义函数等。
+jackson-field-ext 是一个基于 Spring Boot 的 JSON 数据组装组件，通过注解的方式，实现 JSON 数据的组装，支持枚举类、SpEL、自定义函数等。
 ## 快速开始
-> Maven 依赖
+### Maven 依赖
+- jdk 17
 ```xml
 <dependency>
     <groupId>io.github.kanshanos</groupId>
     <artifactId>jackson-field-ext-springboot-starter</artifactId>
-    <version>1.0.3</version>
+    <version>{latest-2.x}</version>
+</dependency>
+```
+- jdk 8
+```xml
+<dependency>
+    <groupId>io.github.kanshanos</groupId>
+    <artifactId>jackson-field-ext-springboot-starter</artifactId>
+    <version>{latest-1.x}</version>
 </dependency>
 ```
 
@@ -123,7 +132,7 @@ ext:
 - ext-suffix: 组装结果字段后缀，默认为： Text， 当 ext 为空时，ext 的生成逻辑：{当前字段名} + {ext-suffix}
 
 ### @AssembleEnum
-> 适用于使用枚举类进行数据组装的场景
+适用于使用枚举类进行数据组装的场景
 - enumClass: 用于组装结果数据的枚举类
 - type: 组装类型，默认为 ONE_TO_ONE
 - srcType: 用于标注组装源数据的类型，详见 @Type
@@ -132,23 +141,23 @@ ext:
 - override: 是否覆盖源数据，默认为 false
 
 #### @Type
-> 用于标注枚举类中用于匹配源数据的类型和目标数据的类型
+用于标注枚举类中用于匹配源数据的类型和目标数据的类型
 - separator: 枚举值分隔符，组装类型为多对多且 dataType = STRING_ARRAY 时生效，默认：,
 - dataType: 组装数据类型，默认为 STRING_ARRAY，可选值： STRING_ARRAY、JSON_ARRAY、LIST、MAP
 
 #### @Mapping
-> 用于标注枚举类中用于匹配目标数据的字段和目标数据的后缀
+用于标注枚举类中用于匹配目标数据的字段和目标数据的后缀
 - src: 枚举类中用于匹配源数据的字段，默认为： code
 - ref: 枚举类中用于匹配目标数据的字段，默认为： text
 
 ### @AssembleSpEL
-> 适用于使用 SpEL 进行数据组装的场景
+适用于使用 SpEL 进行数据组装的场景
 - expression: SpEL 表达式，只能用 `#value` 来标注当前值，如：`expression = "#value > 18 ? '成年' : '未成年'"`
 - ext: 组装结果属性名，默认为： Text， 当 ext 为空时，ext 的生成逻辑：{当前字段名} + {ext-suffix}
 - override: 是否覆盖源数据，默认为 false
 
 ### @AssembleFunction
-> 适用于使用自定义函数进行数据组装的场景
+适用于使用自定义函数进行数据组装的场景
 - function: 自定义函数的实现类，必须实现 Function 接口，默认为空
 - ext: 组装结果属性名，默认为： Text， 当 ext 为空时，ext 的生成逻辑：{当前字段名} + {ext-suffix}
 - override: 是否覆盖源数据，默认为 false
