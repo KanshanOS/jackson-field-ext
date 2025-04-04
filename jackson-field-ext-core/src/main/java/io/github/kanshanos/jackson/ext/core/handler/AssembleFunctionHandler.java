@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import io.github.kanshanos.jackson.ext.core.annotation.AssembleFunction;
 import org.springframework.context.ApplicationContext;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;

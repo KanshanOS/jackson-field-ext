@@ -10,7 +10,7 @@ import io.github.kanshanos.jackson.ext.core.properties.JacksonFieldExtProperties
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.io.IOException;
 
 /**
