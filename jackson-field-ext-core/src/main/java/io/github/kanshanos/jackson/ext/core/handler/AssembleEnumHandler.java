@@ -106,17 +106,14 @@ public class AssembleEnumHandler extends AbstractAssembleHandler<AssembleEnum> {
             return Collections.emptyList();
         }
 
+
         // 根据不同数据类型进行解析
-        switch (dataType) {
-            case STRING_ARRAY:
-                return ParseUtils.parseStringArray(srcFieldValue, type, this.properties);
-            case JSON_ARRAY:
-                return ParseUtils.parseJsonArray(srcFieldValue);
-            case LIST:
-                return ParseUtils.parseList(srcFieldValue);
-            default:
-                return Collections.emptyList();
-        }
+        return switch (dataType) {
+            case STRING_ARRAY -> ParseUtils.parseStringArray(srcFieldValue, type, this.properties);
+            case JSON_ARRAY -> ParseUtils.parseJsonArray(srcFieldValue);
+            case LIST -> ParseUtils.parseList(srcFieldValue);
+            default -> Collections.emptyList();
+        };
     }
 
     /**
@@ -127,17 +124,13 @@ public class AssembleEnumHandler extends AbstractAssembleHandler<AssembleEnum> {
      */
     private Object formatExtFieldValues(Map<Object, Object> extFieldMap, Type extType) {
         DataType dataType = extType.dataType();
-        switch (dataType) {
-            case STRING_ARRAY:
-                return extFieldMap.values().stream()
-                        .map(item -> Objects.toString(item, ""))
-                        .collect(Collectors.joining(TypeUtils.separator(extType, properties)));
-            case JSON_ARRAY:
-                return JSONUtil.toJsonStr(extFieldMap.values());
-            case LIST:
-                return extFieldMap.values();
-            default:
-                return extFieldMap;
-        }
+        return switch (dataType) {
+            case STRING_ARRAY -> extFieldMap.values().stream()
+                    .map(item -> Objects.toString(item, ""))
+                    .collect(Collectors.joining(TypeUtils.separator(extType, properties)));
+            case JSON_ARRAY -> JSONUtil.toJsonStr(extFieldMap.values());
+            case LIST -> extFieldMap.values();
+            default -> extFieldMap;
+        };
     }
 }
