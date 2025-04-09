@@ -117,8 +117,8 @@ public User get() {
 ## 详细使用说明
 ### 配置项
 ```yaml
-ext:
-  field:
+kanshanos:
+  ext-field:
     enabled: true
     separator: ','
     src: 'code'

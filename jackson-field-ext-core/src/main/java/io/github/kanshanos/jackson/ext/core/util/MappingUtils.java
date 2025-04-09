@@ -1,7 +1,7 @@
 package io.github.kanshanos.jackson.ext.core.util;
 
 import io.github.kanshanos.jackson.ext.core.annotation.Mapping;
-import io.github.kanshanos.jackson.ext.core.properties.JacksonFieldExtProperties;
+import io.github.kanshanos.jackson.ext.core.properties.ExtFieldProperties;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -10,11 +10,11 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class MappingUtils {
 
-    public static String src(Mapping mapping, JacksonFieldExtProperties properties) {
+    public static String src(Mapping mapping, ExtFieldProperties properties) {
         return StringUtils.defaultIfBlank(mapping.src(), properties.getSrc());
     }
 
-    public static String ref(Mapping mapping, JacksonFieldExtProperties properties) {
+    public static String ref(Mapping mapping, ExtFieldProperties properties) {
         return StringUtils.defaultIfBlank(mapping.ref(), properties.getRef());
     }
 }

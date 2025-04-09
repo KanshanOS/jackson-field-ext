@@ -3,7 +3,7 @@ package io.github.kanshanos.jackson.ext.core.util;
 import cn.hutool.json.JSONUtil;
 import com.google.common.base.Splitter;
 import io.github.kanshanos.jackson.ext.core.annotation.Type;
-import io.github.kanshanos.jackson.ext.core.properties.JacksonFieldExtProperties;
+import io.github.kanshanos.jackson.ext.core.properties.ExtFieldProperties;
 
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class ParseUtils {
     /**
      * 解析字符串数组类型
      */
-    public static List<String> parseStringArray(Object fieldValue, Type type, JacksonFieldExtProperties properties) {
+    public static List<String> parseStringArray(Object fieldValue, Type type, ExtFieldProperties properties) {
         if (!(fieldValue instanceof String)) {
             throw new IllegalArgumentException(
                     "Expected String for STRING_ARRAY, but got: " + fieldValue.getClass().getName()
