@@ -9,8 +9,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since 2025/3/27 18:42
  */
 @Data
-@ConfigurationProperties(prefix = "ext.field")
-public class JacksonFieldExtProperties {
+@ConfigurationProperties(prefix = ExtFieldProperties.PREFIX)
+public class ExtFieldProperties {
+    public static final String PREFIX = "kanshanos.ext-field";
     private boolean enabled = true;
 
     private String separator = ",";

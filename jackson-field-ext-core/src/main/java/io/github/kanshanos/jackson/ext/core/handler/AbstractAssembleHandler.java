@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.BeanProperty;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.ContextualSerializer;
-import io.github.kanshanos.jackson.ext.core.properties.JacksonFieldExtProperties;
+import io.github.kanshanos.jackson.ext.core.properties.ExtFieldProperties;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -20,7 +20,7 @@ import java.io.IOException;
 public abstract class AbstractAssembleHandler<T> extends JsonSerializer<Object> implements ContextualSerializer {
 
     @Resource
-    protected JacksonFieldExtProperties properties;
+    protected ExtFieldProperties properties;
 
     protected T annotation;
 

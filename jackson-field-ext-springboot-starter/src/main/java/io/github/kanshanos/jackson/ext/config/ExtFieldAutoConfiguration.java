@@ -3,14 +3,14 @@ package io.github.kanshanos.jackson.ext.config;
 import io.github.kanshanos.jackson.ext.core.handler.AssembleEnumHandler;
 import io.github.kanshanos.jackson.ext.core.handler.AssembleFunctionHandler;
 import io.github.kanshanos.jackson.ext.core.handler.AssembleSpELHandler;
-import io.github.kanshanos.jackson.ext.core.properties.JacksonFieldExtProperties;
+import io.github.kanshanos.jackson.ext.core.properties.ExtFieldProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableConfigurationProperties(JacksonFieldExtProperties.class)
+@EnableConfigurationProperties(ExtFieldProperties.class)
 public class ExtFieldAutoConfiguration {
 
     @Bean
