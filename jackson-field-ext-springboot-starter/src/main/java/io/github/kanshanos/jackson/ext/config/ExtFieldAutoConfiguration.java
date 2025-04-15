@@ -3,6 +3,8 @@ package io.github.kanshanos.jackson.ext.config;
 import io.github.kanshanos.jackson.ext.core.handler.AssembleEnumHandler;
 import io.github.kanshanos.jackson.ext.core.handler.AssembleFunctionHandler;
 import io.github.kanshanos.jackson.ext.core.handler.AssembleSpELHandler;
+import io.github.kanshanos.jackson.ext.core.log.ILog;
+import io.github.kanshanos.jackson.ext.core.log.Slf4jLog;
 import io.github.kanshanos.jackson.ext.core.properties.ExtFieldProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -29,6 +31,12 @@ public class ExtFieldAutoConfiguration {
     @ConditionalOnMissingBean
     public AssembleFunctionHandler functionHandler() {
         return new AssembleFunctionHandler();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public ILog log() {
+        return new Slf4jLog();
     }
 
 
