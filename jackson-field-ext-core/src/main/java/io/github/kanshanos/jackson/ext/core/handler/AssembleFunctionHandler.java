@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.BeanProperty;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import io.github.kanshanos.jackson.ext.core.annotation.AssembleFunction;
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 
 import javax.annotation.Resource;
@@ -62,7 +63,7 @@ public class AssembleFunctionHandler extends AbstractAssembleHandler<AssembleFun
     @SuppressWarnings("unchecked")
     public <T, R> Function<T, R> getFunction(Class<? extends Function<?, ?>> functionClass) {
         // 优先从 Spring 容器中获取 function
-        Function<T, R> function = (Function<T, R>) applicationContext.getBeanProvider(functionClass).getIfAvailable();
+        Function<T, R> function = this.getBeanProvider(functionClass);
         if (Objects.nonNull(function)) {
             return function;
         }
@@ -96,6 +97,22 @@ public class AssembleFunctionHandler extends AbstractAssembleHandler<AssembleFun
             return (Function<T, R>) castedClass.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             throw new RuntimeException("Failed to instantiate function: " + functionClass.getName(), e);
+        }
+    }
+
+    /**
+     * 兼容低版本的 Spring 版本
+     * Spring 5.1 之后支持 getBeanProvider 方法
+     *
+     * @author Neo
+     * @since 2025/4/15 16:53
+     */
+    @SuppressWarnings("unchecked")
+    private <T, R> Function<T, R> getBeanProvider(Class<? extends Function<?, ?>> functionClass) {
+        try {
+            return (Function<T, R>) applicationContext.getBean(functionClass);
+        } catch (BeansException e) {
+            return null;
         }
     }
 
