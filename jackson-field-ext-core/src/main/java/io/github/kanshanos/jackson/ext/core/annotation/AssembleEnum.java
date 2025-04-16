@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.github.kanshanos.jackson.ext.core.enums.AssembleType;
 import io.github.kanshanos.jackson.ext.core.enums.ExceptionStrategy;
+import io.github.kanshanos.jackson.ext.core.enums.OverrideStrategy;
 import io.github.kanshanos.jackson.ext.core.handler.AssembleEnumHandler;
 
 import java.lang.annotation.ElementType;
@@ -58,16 +59,16 @@ public @interface AssembleEnum {
     String ext() default "";
 
     /**
-     * 使用覆盖当前字段，默认为 false
+     * 使用覆盖当前字段，默认为 DEFAULT
      *
      * @return clazz
      */
-    boolean override() default false;
+    OverrideStrategy override() default OverrideStrategy.DEFAULT;
 
     /**
      * 异常处理策略，默认为 DEFAULT
      *
      * @return strategy
      */
-    ExceptionStrategy exceptionStrategy() default ExceptionStrategy.DEFAULT;
+    ExceptionStrategy exception() default ExceptionStrategy.DEFAULT;
 }
