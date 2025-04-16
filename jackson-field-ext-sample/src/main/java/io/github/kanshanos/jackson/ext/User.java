@@ -7,7 +7,7 @@ import io.github.kanshanos.jackson.ext.core.annotation.Mapping;
 import io.github.kanshanos.jackson.ext.core.annotation.Type;
 import io.github.kanshanos.jackson.ext.core.enums.AssembleType;
 import io.github.kanshanos.jackson.ext.core.enums.DataType;
-import io.github.kanshanos.jackson.ext.core.enums.OverrideStrategy;
+import io.github.kanshanos.jackson.ext.core.enums.TrueFalse;
 import io.github.kanshanos.jackson.ext.core.handler.function.MaskEmailFunction;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,13 +36,13 @@ public class User implements Serializable {
             etxType = @Type(dataType = DataType.MAP),
             mapping = @Mapping(src = "code", ref = "desc"),
             ext = "categoryMapping",
-            override = OverrideStrategy.TRUE
+            override = TrueFalse.TRUE
     )
     private List<Integer> category2;
 
     @AssembleSpEL(ext = "ageName", expression = "#value > 18 ? '成年' : '未成年'")
     private int age;
 
-    @AssembleFunction(function = MaskEmailFunction.class, override = OverrideStrategy.TRUE)
+    @AssembleFunction(function = MaskEmailFunction.class, override = TrueFalse.TRUE)
     private String email;
 }
