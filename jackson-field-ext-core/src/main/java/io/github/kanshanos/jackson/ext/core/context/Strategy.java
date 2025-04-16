@@ -20,16 +20,16 @@ public class Strategy {
     /**
      * 是否忽略，默认：DEFAULT
      */
-    private TrueFalse ignore;
+    private TrueFalse ignore = TrueFalse.DEFAULT;
 
     /**
      * 使用覆盖当前字段，默认为 DEFAULT
      */
-    private TrueFalse override;
+    private TrueFalse override = TrueFalse.DEFAULT;
 
     /**
      * 异常处理策略，默认为 DEFAULT
      */
-    private ExceptionStrategy exception;
+    private ExceptionStrategy exception = ExceptionStrategy.DEFAULT;
 
 }
