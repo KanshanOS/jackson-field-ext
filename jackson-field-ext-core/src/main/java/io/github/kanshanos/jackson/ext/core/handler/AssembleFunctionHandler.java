@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.BeanProperty;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import io.github.kanshanos.jackson.ext.core.annotation.AssembleFunction;
+import io.github.kanshanos.jackson.ext.core.enums.ExceptionStrategy;
 import org.springframework.context.ApplicationContext;
 
 import jakarta.annotation.Resource;
@@ -36,6 +37,11 @@ public class AssembleFunctionHandler extends AbstractAssembleHandler<AssembleFun
         String extFieldName = resolveExtFieldName(annotation.ext());
         Object extFieldValue = applyFunction(annotation.function(), value);
         serializeWithOverrideCheck(value, extFieldName, extFieldValue, gen, serializers, annotation.override());
+    }
+
+    @Override
+    protected ExceptionStrategy getAnnotationExceptionStrategy() {
+        return annotation.exceptionStrategy();
     }
 
 

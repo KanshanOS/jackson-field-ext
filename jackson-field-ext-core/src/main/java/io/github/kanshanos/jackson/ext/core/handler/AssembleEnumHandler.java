@@ -12,6 +12,7 @@ import io.github.kanshanos.jackson.ext.core.annotation.Type;
 import io.github.kanshanos.jackson.ext.core.cache.EnumCache;
 import io.github.kanshanos.jackson.ext.core.enums.AssembleType;
 import io.github.kanshanos.jackson.ext.core.enums.DataType;
+import io.github.kanshanos.jackson.ext.core.enums.ExceptionStrategy;
 import io.github.kanshanos.jackson.ext.core.util.MappingUtils;
 import io.github.kanshanos.jackson.ext.core.util.ParseUtils;
 import io.github.kanshanos.jackson.ext.core.util.TypeUtils;
@@ -46,6 +47,11 @@ public class AssembleEnumHandler extends AbstractAssembleHandler<AssembleEnum> {
         Object extFieldValue = resolveExtFieldValue(value);
 
         serializeWithOverrideCheck(value, extFieldName, extFieldValue, gen, serializers, annotation.override());
+    }
+
+    @Override
+    protected ExceptionStrategy getAnnotationExceptionStrategy() {
+        return annotation.exceptionStrategy();
     }
 
     /**

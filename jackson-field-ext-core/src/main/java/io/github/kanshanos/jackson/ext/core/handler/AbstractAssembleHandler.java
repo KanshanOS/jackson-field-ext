@@ -39,20 +39,25 @@ public abstract class AbstractAssembleHandler<T> extends JsonSerializer<Object> 
         try {
             doSerialize(value, gen, serializers);
         } catch (Exception e) {
-            ExceptionStrategy exceptionStrategy = properties.getExceptionStrategy();
+            ExceptionStrategy exceptionStrategy = this.getExceptionStrategy();
             switch (exceptionStrategy) {
+                case THROWS:
+                    throw e;
+                case THROWS_AND_LOG:
+                    log.error("JacksonFieldExtException", e);
+                    throw e;
                 case ORIGIN_VALUE:
                     serializers.defaultSerializeValue(value, gen);
-                    return;
-                case HIDDEN_VALUE:
-                    serializers.defaultSerializeValue(StringUtils.EMPTY, gen);
-                    return;
-                case HIDDEN_AND_LOG:
-                    serializers.defaultSerializeValue(StringUtils.EMPTY, gen);
-                    log.error("JacksonFieldExtException", e);
-                    return;
+                    break;
                 case ORIGIN_AND_LOG:
                     serializers.defaultSerializeValue(value, gen);
+                    log.error("JacksonFieldExtException", e);
+                    break;
+                case HIDDEN_VALUE:
+                    serializers.defaultSerializeValue(StringUtils.EMPTY, gen);
+                    break;
+                case HIDDEN_AND_LOG:
+                    serializers.defaultSerializeValue(StringUtils.EMPTY, gen);
                     log.error("JacksonFieldExtException", e);
                     break;
             }
@@ -75,6 +80,20 @@ public abstract class AbstractAssembleHandler<T> extends JsonSerializer<Object> 
      * 执行具体的序列化逻辑，由子类实现
      */
     protected abstract void doSerialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException;
+
+    /**
+     * 获取注解异常策略
+     */
+    protected abstract ExceptionStrategy getAnnotationExceptionStrategy();
+
+    /**
+     * 获取异常策略
+     */
+    protected ExceptionStrategy getExceptionStrategy(){
+        return ExceptionStrategy.DEFAULT == getAnnotationExceptionStrategy()
+                ? properties.getExceptionStrategy() : getAnnotationExceptionStrategy();
+    }
+
 
     /**
      * 解析扩展字段名

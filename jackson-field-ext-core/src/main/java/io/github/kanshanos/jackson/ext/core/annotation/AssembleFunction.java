@@ -2,6 +2,7 @@ package io.github.kanshanos.jackson.ext.core.annotation;
 
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.github.kanshanos.jackson.ext.core.enums.ExceptionStrategy;
 import io.github.kanshanos.jackson.ext.core.handler.AssembleFunctionHandler;
 
 
@@ -44,4 +45,11 @@ public @interface AssembleFunction {
      * @return clazz
      */
     Class<? extends Function<?, ?>> function();
+
+    /**
+     * 异常处理策略，默认为 DEFAULT
+     *
+     * @return strategy
+     */
+    ExceptionStrategy exceptionStrategy() default ExceptionStrategy.DEFAULT;
 }
