@@ -2,6 +2,7 @@ package io.github.kanshanos.jackson.ext.core.context;
 
 import io.github.kanshanos.jackson.ext.core.enums.ExceptionStrategy;
 import io.github.kanshanos.jackson.ext.core.enums.TrueFalse;
+import lombok.experimental.UtilityClass;
 
 /**
  * 组装上下文
@@ -9,35 +10,25 @@ import io.github.kanshanos.jackson.ext.core.enums.TrueFalse;
  * @author Neo
  * @since 2025/4/16 13:22
  */
+@UtilityClass
 public class AssembleContext {
-    private static final ThreadLocal<Strategy> ASSEMBLE_STRATEGY_HOLDER = new ThreadLocal<>();
+
+    private static final ThreadLocal<Strategy> ASSEMBLE_STRATEGY_HOLDER = ThreadLocal.withInitial(Strategy::new);
 
     public static void strategy(TrueFalse ignore, TrueFalse override, ExceptionStrategy exception) {
         ASSEMBLE_STRATEGY_HOLDER.set(new Strategy(ignore, override, exception));
     }
 
     public static TrueFalse ignore() {
-        Strategy strategy = ASSEMBLE_STRATEGY_HOLDER.get();
-        if (strategy != null) {
-            return strategy.getIgnore();
-        }
-        return TrueFalse.DEFAULT;
+        return ASSEMBLE_STRATEGY_HOLDER.get().getIgnore();
     }
 
     public static TrueFalse override() {
-        Strategy strategy = ASSEMBLE_STRATEGY_HOLDER.get();
-        if (strategy != null) {
-            return strategy.getOverride();
-        }
-        return TrueFalse.DEFAULT;
+        return ASSEMBLE_STRATEGY_HOLDER.get().getOverride();
     }
 
     public static ExceptionStrategy exception() {
-        Strategy strategy = ASSEMBLE_STRATEGY_HOLDER.get();
-        if (strategy != null) {
-            return strategy.getException();
-        }
-        return ExceptionStrategy.DEFAULT;
+        return ASSEMBLE_STRATEGY_HOLDER.get().getException();
     }
 
     public static void clear() {
