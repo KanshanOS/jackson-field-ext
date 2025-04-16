@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.github.kanshanos.jackson.ext.core.enums.AssembleType;
 import io.github.kanshanos.jackson.ext.core.enums.ExceptionStrategy;
-import io.github.kanshanos.jackson.ext.core.enums.OverrideStrategy;
+import io.github.kanshanos.jackson.ext.core.enums.TrueFalse;
 import io.github.kanshanos.jackson.ext.core.handler.AssembleEnumHandler;
 
 import java.lang.annotation.ElementType;
@@ -63,7 +63,7 @@ public @interface AssembleEnum {
      *
      * @return clazz
      */
-    OverrideStrategy override() default OverrideStrategy.DEFAULT;
+    TrueFalse override() default TrueFalse.DEFAULT;
 
     /**
      * 异常处理策略，默认为 DEFAULT

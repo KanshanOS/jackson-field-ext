@@ -3,7 +3,7 @@ package io.github.kanshanos.jackson.ext.core.annotation;
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.github.kanshanos.jackson.ext.core.enums.ExceptionStrategy;
-import io.github.kanshanos.jackson.ext.core.enums.OverrideStrategy;
+import io.github.kanshanos.jackson.ext.core.enums.TrueFalse;
 import io.github.kanshanos.jackson.ext.core.handler.AssembleFunctionHandler;
 
 
@@ -38,7 +38,7 @@ public @interface AssembleFunction {
      *
      * @return clazz
      */
-    OverrideStrategy override() default OverrideStrategy.DEFAULT;
+    TrueFalse override() default TrueFalse.DEFAULT;
 
     /**
      * 扩展字段值类型

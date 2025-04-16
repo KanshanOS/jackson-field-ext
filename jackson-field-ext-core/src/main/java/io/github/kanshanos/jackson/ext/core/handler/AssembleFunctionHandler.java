@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.BeanProperty;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import io.github.kanshanos.jackson.ext.core.annotation.AssembleFunction;
 import io.github.kanshanos.jackson.ext.core.enums.ExceptionStrategy;
-import io.github.kanshanos.jackson.ext.core.enums.OverrideStrategy;
+import io.github.kanshanos.jackson.ext.core.enums.TrueFalse;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 
@@ -42,7 +42,7 @@ public class AssembleFunctionHandler extends AbstractAssembleHandler<AssembleFun
     }
 
     @Override
-    protected OverrideStrategy getAnnotationOverrideStrategy() {
+    protected TrueFalse getAnnotationOverrideStrategy() {
         return annotation.override();
     }
 

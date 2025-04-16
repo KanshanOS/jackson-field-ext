@@ -1,11 +1,8 @@
 package io.github.kanshanos.jackson.ext.core.annotation;
 
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.github.kanshanos.jackson.ext.core.enums.ExceptionStrategy;
 import io.github.kanshanos.jackson.ext.core.enums.TrueFalse;
-import io.github.kanshanos.jackson.ext.core.handler.AssembleSpELHandler;
-
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -13,29 +10,20 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 通过 SpEL 表达式组装
+ * 组装策略
  *
  * @author Neo
- * @since 2025/3/26 16:38
+ * @since 2025/4/16 13:09
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD})
+@Target({ElementType.TYPE, ElementType.METHOD})
 @JacksonAnnotationsInside
-@JsonSerialize(using = AssembleSpELHandler.class)
-public @interface AssembleSpEL {
-    /**
-     * 扩展字段，默认为原始属性名 + Text
-     *
-     * @return field name
-     */
-    String ext() default "";
+public @interface AssembleStrategy {
 
     /**
-     * SpEL 表达式，示例：#value > 18 ? '成年' : '未成年'
-     *
-     * @return expression
+     * 是否忽略，默认：false
      */
-    String expression() default "";
+    TrueFalse ignore() default TrueFalse.DEFAULT;
 
     /**
      * 使用覆盖当前字段，默认为 DEFAULT
@@ -50,4 +38,5 @@ public @interface AssembleSpEL {
      * @return strategy
      */
     ExceptionStrategy exception() default ExceptionStrategy.DEFAULT;
+
 }

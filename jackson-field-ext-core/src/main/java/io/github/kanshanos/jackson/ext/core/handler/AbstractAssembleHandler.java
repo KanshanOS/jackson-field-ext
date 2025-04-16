@@ -5,8 +5,9 @@ import com.fasterxml.jackson.databind.BeanProperty;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.ContextualSerializer;
+import io.github.kanshanos.jackson.ext.core.context.AssembleContext;
 import io.github.kanshanos.jackson.ext.core.enums.ExceptionStrategy;
-import io.github.kanshanos.jackson.ext.core.enums.OverrideStrategy;
+import io.github.kanshanos.jackson.ext.core.enums.TrueFalse;
 import io.github.kanshanos.jackson.ext.core.log.ILog;
 import io.github.kanshanos.jackson.ext.core.properties.ExtFieldProperties;
 import org.apache.commons.lang3.StringUtils;
@@ -31,7 +32,14 @@ public abstract class AbstractAssembleHandler<T> extends JsonSerializer<Object> 
 
     @Override
     public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+        // 判断是否开启扩展字段功能
         if (!properties.isEnabled() || annotation == null) {
+            serializers.defaultSerializeValue(value, gen);
+            return;
+        }
+
+        // 判断当前请求是否忽略
+        if (TrueFalse.TRUE == AssembleContext.ignore()) {
             serializers.defaultSerializeValue(value, gen);
             return;
         }
@@ -85,7 +93,7 @@ public abstract class AbstractAssembleHandler<T> extends JsonSerializer<Object> 
     /**
      * 获取注解覆盖策略策略
      */
-    protected abstract OverrideStrategy getAnnotationOverrideStrategy();
+    protected abstract TrueFalse getAnnotationOverrideStrategy();
 
     /**
      * 获取注解异常策略
@@ -95,14 +103,23 @@ public abstract class AbstractAssembleHandler<T> extends JsonSerializer<Object> 
     /**
      * 获取覆盖策略
      */
-    protected OverrideStrategy getOverrideStrategy(){
-        return OverrideStrategy.DEFAULT == getAnnotationOverrideStrategy()
+    protected TrueFalse getOverrideStrategy() {
+        TrueFalse override = AssembleContext.override();
+        if (TrueFalse.DEFAULT != override) {
+            return override;
+        }
+        return TrueFalse.DEFAULT == getAnnotationOverrideStrategy()
                 ? properties.getOverride() : getAnnotationOverrideStrategy();
     }
+
     /**
      * 获取异常策略
      */
-    protected ExceptionStrategy getExceptionStrategy(){
+    protected ExceptionStrategy getExceptionStrategy() {
+        ExceptionStrategy exception = AssembleContext.exception();
+        if (ExceptionStrategy.DEFAULT != exception) {
+            return exception;
+        }
         return ExceptionStrategy.DEFAULT == getAnnotationExceptionStrategy()
                 ? properties.getException() : getAnnotationExceptionStrategy();
     }
@@ -129,8 +146,7 @@ public abstract class AbstractAssembleHandler<T> extends JsonSerializer<Object> 
      */
     protected void serializeWithOverrideStrategy(Object value, String extFieldName, Object extFieldValue,
                                                  JsonGenerator gen, SerializerProvider serializers) throws IOException {
-
-        if (OverrideStrategy.TRUE == this.getOverrideStrategy()) {
+        if (TrueFalse.TRUE == this.getOverrideStrategy()) {
             serializers.defaultSerializeValue(extFieldValue, gen);
         } else {
             serializeWithExtField(value, extFieldValue, extFieldName, gen, serializers);
