@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.BeanProperty;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import io.github.kanshanos.jackson.ext.core.annotation.AssembleFunction;
 import io.github.kanshanos.jackson.ext.core.enums.ExceptionStrategy;
+import io.github.kanshanos.jackson.ext.core.enums.OverrideStrategy;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 
@@ -37,12 +38,17 @@ public class AssembleFunctionHandler extends AbstractAssembleHandler<AssembleFun
     protected void doSerialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         String extFieldName = resolveExtFieldName(annotation.ext());
         Object extFieldValue = applyFunction(annotation.function(), value);
-        serializeWithOverrideCheck(value, extFieldName, extFieldValue, gen, serializers, annotation.override());
+        serializeWithOverrideStrategy(value, extFieldName, extFieldValue, gen, serializers);
+    }
+
+    @Override
+    protected OverrideStrategy getAnnotationOverrideStrategy() {
+        return annotation.override();
     }
 
     @Override
     protected ExceptionStrategy getAnnotationExceptionStrategy() {
-        return annotation.exceptionStrategy();
+        return annotation.exception();
     }
 
 

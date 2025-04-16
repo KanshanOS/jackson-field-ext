@@ -1,6 +1,7 @@
 package io.github.kanshanos.jackson.ext.core.properties;
 
 import io.github.kanshanos.jackson.ext.core.enums.ExceptionStrategy;
+import io.github.kanshanos.jackson.ext.core.enums.OverrideStrategy;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -15,7 +16,9 @@ public class ExtFieldProperties {
     public static final String PREFIX = "kanshanos.ext-field";
     private boolean enabled = true;
 
-    private ExceptionStrategy exceptionStrategy = ExceptionStrategy.ORIGIN_VALUE;
+    private ExceptionStrategy exception = ExceptionStrategy.ORIGIN_VALUE;
+
+    private OverrideStrategy override = OverrideStrategy.FALSE;
 
     private String separator = ",";
 

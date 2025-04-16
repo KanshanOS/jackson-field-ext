@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import io.github.kanshanos.jackson.ext.core.annotation.AssembleSpEL;
 import io.github.kanshanos.jackson.ext.core.enums.ExceptionStrategy;
+import io.github.kanshanos.jackson.ext.core.enums.OverrideStrategy;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
@@ -33,12 +34,17 @@ public class AssembleSpELHandler extends AbstractAssembleHandler<AssembleSpEL> {
     protected void doSerialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         String extFieldName = resolveExtFieldName(annotation.ext());
         Object extFieldValue = evaluateSpEL(value, annotation.expression());
-        serializeWithOverrideCheck(value, extFieldName, extFieldValue, gen, serializers, annotation.override());
+        serializeWithOverrideStrategy(value, extFieldName, extFieldValue, gen, serializers);
+    }
+
+    @Override
+    protected OverrideStrategy getAnnotationOverrideStrategy() {
+        return annotation.override();
     }
 
     @Override
     protected ExceptionStrategy getAnnotationExceptionStrategy() {
-        return annotation.exceptionStrategy();
+        return annotation.exception();
     }
 
     private Object evaluateSpEL(Object value, String expression) {
