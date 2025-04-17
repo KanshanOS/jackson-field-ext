@@ -30,6 +30,7 @@ public class UserController {
             .setAge(19)
             .setEmail("123456@gmail.com");
 
+
     @GetMapping("get")
     public User get() {
         return user;
