@@ -43,6 +43,6 @@ public class User implements Serializable {
     @AssembleSpEL(ext = "ageName", expression = "#value > 18 ? '成年' : '未成年'")
     private int age;
 
-    @AssembleFunction(function = MaskEmailFunction.class, override = TrueFalse.TRUE)
+    @AssembleFunction(function = {MaskEmailFunction.class, MD5Function.class}, override = TrueFalse.TRUE)
     private String email;
 }

@@ -37,7 +37,13 @@ public class AssembleFunctionHandler extends AbstractAssembleHandler<AssembleFun
     @Override
     protected void doSerialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         String extFieldName = resolveExtFieldName(annotation.ext());
-        Object extFieldValue = applyFunction(annotation.function(), value);
+
+        Class<? extends Function<?, ?>>[] functions = annotation.function();
+        Object extFieldValue = value;
+        for (Class<? extends Function<?, ?>> function : functions) {
+            extFieldValue = applyFunction(function, extFieldValue);
+        }
+
         serializeWithOverrideStrategy(value, extFieldName, extFieldValue, gen, serializers);
     }
 

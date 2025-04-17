@@ -45,7 +45,7 @@ public @interface AssembleFunction {
      *
      * @return clazz
      */
-    Class<? extends Function<?, ?>> function();
+    Class<? extends Function<?, ?>>[] function();
 
     /**
      * 异常处理策略，默认为 DEFAULT
